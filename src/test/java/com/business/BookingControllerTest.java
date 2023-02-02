@@ -1,4 +1,4 @@
-package com.business.unittesting;
+package com.business;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -58,6 +58,21 @@ public class BookingControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$",hasSize(3)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1].name",is("The Wall Street")));
     }
+
+    @Test
+    public void getBookByBookIdTest() throws Exception {
+
+        List<Book> recordList = new ArrayList<>(Arrays.asList(record1,record2,record3));
+
+        Mockito.when(bookRepo.findAll()).thenReturn(recordList);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/book")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$",hasSize(3)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].name",is("The Wall Street")));
+    }
+
 
 
 

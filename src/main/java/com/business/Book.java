@@ -1,4 +1,4 @@
-package com.business.unittesting;
+package com.business;
 
 import jakarta.persistence.*;
 import lombok.*;
